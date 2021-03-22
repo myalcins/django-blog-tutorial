@@ -3,5 +3,5 @@ from blog.views.homepage_views import homepage
 
 
 urlpatterns = [
-    path('homepage/', homepage),
+    path('', homepage, name="homepage"),
 ]

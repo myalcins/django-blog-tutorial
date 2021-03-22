@@ -21,6 +21,7 @@ class Article(DateAbstractModel):
         verbose_name = "Article"
         verbose_name_plural = "Articles"
         db_table = "article"
+        ordering = ['-id']
 
     def __str__(self) -> str:
         return self.title
