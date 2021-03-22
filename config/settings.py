@@ -26,8 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'account',
+    # third party
     'ckeditor'
 ]
+
+AUTH_USER_MODEL = "account.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
