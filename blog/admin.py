@@ -1,4 +1,4 @@
-from blog.models import Category, Article, Comment
+from blog.models import Category, Article, Comment, Contact
 from django.contrib import admin
 
 
@@ -17,3 +17,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('article', 'owner', 'created_at')
 
 admin.site.register(Comment, CommentAdmin)
+
+
+class ContactAdmin(admin.ModelAdmin):
+    search_fields = ('email', 'title', 'name')
+    list_display = ('email', 'name', 'title', 'created_at')
+
+admin.site.register(Contact, ContactAdmin)
