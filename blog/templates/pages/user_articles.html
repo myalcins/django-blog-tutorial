@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}'s Articles{% endblock title %}
+
+
+{% block content %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Modified Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for article in articles  %}
+      <tr>
+        <th scope="row">{{ article.id }}</th>
+        <td>{{ article.title }}</td>
+        <td>{{ article.modified_at }}</td>
+        <td>Actions Coming</td>
+      </tr>
+    {% empty %}
+      <h1>Empty</h1>
+    {% endfor %}
+    </tbody>
+</table>
+   
+    
+     
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            
+            {% if articles.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ articles.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+            {% endif %}
+                
+         
+          <li class="page-item"><a class="page-link" href="#">{{ articles.number }}</a></li>
+
+          
+          {% if articles.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.paginator.num_pages }}">Last Page</a>
+            </li>
+          {% endif %}
+              
+          
+        </ul>
+      </nav>
+    
+{% endblock content %}
+    
