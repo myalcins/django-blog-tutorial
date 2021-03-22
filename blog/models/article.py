@@ -1,4 +1,4 @@
-from enum import unique
+from blog.models.abstract_date_models import DateAbstractModel
 from django.db import models
 from autoslug import AutoSlugField
 from blog.models import Category
@@ -7,11 +7,9 @@ from ckeditor.fields import RichTextField
 
 
 
-class Article(models.Model):
+class Article(DateAbstractModel):
     title = models.CharField(max_length=50)
     content = RichTextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(populate_from="title", unique=True)
     image = models.ImageField(upload_to="article_images")
 
