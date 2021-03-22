@@ -3,11 +3,13 @@ from django.db import models
 from autoslug import AutoSlugField
 from blog.models import Category
 from django.conf import settings
+from ckeditor.fields import RichTextField
+
 
 
 class Article(models.Model):
     title = models.CharField(max_length=50)
-    content = models.TextField()
+    content = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(populate_from="title", unique=True)
@@ -21,3 +23,6 @@ class Article(models.Model):
         verbose_name = "Article"
         verbose_name_plural = "Articles"
         db_table = "article"
+
+    def __str__(self) -> str:
+        return self.title
