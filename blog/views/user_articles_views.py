@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/")
 def user_articles(request):
-    articles = request.user.articles
+    articles = request.user.articles.all()
     page = request.GET.get('page')
     paginator = Paginator(articles, 10)
 

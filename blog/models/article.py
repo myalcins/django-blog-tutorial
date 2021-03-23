@@ -6,7 +6,6 @@ from django.conf import settings
 from ckeditor.fields import RichTextField
 
 
-
 class Article(DateAbstractModel):
     title = models.CharField(max_length=50)
     content = RichTextField()

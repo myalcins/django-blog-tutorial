@@ -11,7 +11,7 @@
 
         {% for category in categories %}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="{% url 'category' slug=category.slug %}" href="#">{{ category.title }}</a>
+            <a class="nav-link active" href="{% url 'category' slug=category.slug %}">{{ category.title }}</a>
           </li>          
         {% endfor %}
          

@@ -15,11 +15,11 @@
       </tr>
     </thead>
     <tbody>
-    {% for article in articles  %}
+    {% for article in articles %}
       <tr>
         <th scope="row">{{ article.id }}</th>
         <td>{{ article.title }}</td>
-        <td>{{ article.modified_at }}</td>
+        <td>{{ article.modified_at | timesince }} ago</td>
         <td>Actions Coming</td>
       </tr>
     {% empty %}
