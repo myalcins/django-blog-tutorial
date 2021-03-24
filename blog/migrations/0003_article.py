@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('modified_at', models.DateTimeField(auto_now=True)),
                 ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='title', unique=True)),
                 ('image', models.ImageField(upload_to='article_images')),
-                ('categorys', models.ManyToManyField(related_name='articles', to='blog.Category')),
+                ('categories', models.ManyToManyField(related_name='articles', to='blog.Category')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='articles', to=settings.AUTH_USER_MODEL)),
             ],
             options={

@@ -8,7 +8,7 @@ class Category(models.Model):
 
     class Meta:
         db_table = "category"
-        verbose_name_plural = "Categorys"
+        verbose_name_plural = "categories"
         verbose_name = "Category"
 
     def __str__(self) -> str:

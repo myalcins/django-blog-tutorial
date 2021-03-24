@@ -10,7 +10,7 @@ def user_articles(request):
     paginator = Paginator(articles, 10)
 
 
-    return render(request, 'pages/user_articles.html', context={
+    return render(request, 'pages/user-articles.html', context={
         "articles": paginator.get_page(page),
         "title": request.user.username
     })
