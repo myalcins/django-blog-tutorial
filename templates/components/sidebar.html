@@ -2,7 +2,12 @@
 
   
   {% if request.user.is_authenticated %}
-    <img src="..." class="card-img-top" alt="...">
+  
+  {% if request.user.avatar %}
+  <img src="{{ request.user.avatar.url }}" class="card-img-top rounded-circle mt-1 p-3" alt="...">
+
+  {% endif %}
+    
     <div class="card-body">
       <h5 class="card-title">{{ request.user.username }}</h5>
       <p class="card-text">{{ request.user.email }}</p>
@@ -15,11 +20,13 @@
         <a href="{% url 'create-article' %}">Create Article</a>
       </li>
       
-      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">
+        <a href=" {% url 'edit-profile' %}">Edit Profile</a>   
+      </li>
     </ul>
     <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <a href="{% url 'change-password' %}" class="card-link">Change Password</a>
+      <a href="{% url 'log-out' %}" class="card-link">Log Out</a>
     </div>
   {% else %}
 

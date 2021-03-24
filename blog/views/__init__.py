@@ -7,3 +7,5 @@ from .create_article_views import create_article
 from .edit_article_views import edit_article
 from .delete_article_views import delete_article
 from .delete_comment_views import delete_comment
+
+from .article_views import ArticleListView, ArticleDetailView

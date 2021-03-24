@@ -14,8 +14,22 @@
             <a class="nav-link active" href="{% url 'category' slug=category.slug %}">{{ category.title }}</a>
           </li>          
         {% endfor %}
-         
       </ul>
+        
+        {% if not request.user.is_authenticated %}
+        <ul class="navbar-nav justify-content-end">        
+          <li class="nav-item">
+          <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link active" href="{% url 'register' %}">Register</a>
+        </li>
+      </ul>
+        {% endif %}
+          
+
+
+      
       <form action="{% url 'homepage' %}" class="d-flex">
         <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success"  type="submit">Search</button>

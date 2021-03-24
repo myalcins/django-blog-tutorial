@@ -16,7 +16,6 @@ def article_detail(request, slug):
             comment.save()
     comment_form = CommentForm()
 
-
     return render(request, 'pages/article-detail.html', context={
         "article": article,
         "comments": comments,
