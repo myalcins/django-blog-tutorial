@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ article.title }}{% endblock title %}
 
@@ -24,7 +25,17 @@
         </div>
     </div>
     
+    <h5>Comments</h5>
+
     
+    {% if request.user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <input type="submit" value="Comment">
+        </form>
+     {% endif %}
+        
     {% for comment in comments  %}
         <div class="card mt-2 mb-2">
             <div class="card-body" style="display: flex; flex-direction: row;">
@@ -36,6 +47,10 @@
                 <div class="col-sm">
                     <h5 class="card-title">{{ comment.owner.username }}</h5>
                     <p class="card-text">{{ comment.content }}</p>
+                    
+                    {% if request.user == comment.owner  %}
+                        <p><a class="btn btn-danger" href="{% url 'delete-comment' id=comment.id %}">Delete</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
