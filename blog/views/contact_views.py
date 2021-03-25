@@ -1,17 +1,17 @@
 from django.shortcuts import redirect, render
 from blog.forms import ContactForm
-from blog.models import Contact
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 
-def contact(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('homepage')
-    if request.method == 'GET':
-        form = ContactForm()
-        context = {
-            'form': form,
-        }
-        return render(request, 'pages/contact.html', context=context)
+class ContactFormView(FormView):
+    template_name = 'pages/contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('homepage')
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Your message sended succesfully.")
+        return redirect(self.success_url)
+    

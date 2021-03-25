@@ -12,7 +12,7 @@ class Article(DateAbstractModel):
     slug = AutoSlugField(populate_from="title", unique=True)
     image = models.ImageField(upload_to="article_images")
 
-    categories = models.ManyToManyField(Category, related_name="articles")
+    category = models.ManyToManyField(Category, related_name="articles")
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="articles",
                             on_delete=models.CASCADE)
 

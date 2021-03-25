@@ -21,8 +21,8 @@
         <td>{{ article.title }}</td>
         <td>{{ article.modified_at | timesince }} ago</td>
         <td>
-          <a class="btn btn-primary" href="{% url 'edit-article' slug=article.slug %}">Edit</a>
-          <a class="btn btn-danger" href="{% url 'delete-article' slug=article.slug %}">Delete</a>
+          <a class="btn btn-primary" href="{% url 'article-edit' slug=article.slug %}">Edit</a>
+          <a class="btn btn-danger" href="{% url 'article-delete' slug=article.slug %}">Delete</a>
         </td>
       </tr>
     {% empty %}

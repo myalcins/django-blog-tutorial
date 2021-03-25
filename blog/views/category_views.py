@@ -1,16 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from blog.models import Category 
-from django.core.paginator import Paginator
+from django.views.generic import ListView
+from django.db.models import Q
 
 
-def category(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    articles = category.articles.all()
-    page = request.GET.get('page')
-    paginator = Paginator(articles, 10)
 
+class CategoriesArticleListView(ListView):
+    template_name = 'pages/category.html'
+    context_object_name = 'articles'
+    paginate_by = 10
 
-    return render(request, 'pages/category.html', context={
-        "articles": paginator.get_page(page),
-        "title": category.title 
-    })
+    def get_queryset(self):
+        category =  Category.objects.prefetch_related('articles').get(slug=self.kwargs.get('slug'))
+        articles = category.articles.all()
+        return articles
