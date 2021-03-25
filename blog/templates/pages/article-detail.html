@@ -60,7 +60,7 @@
                     <p class="card-text">{{ comment.content }}</p>
                     
                     {% if request.user == comment.owner  %}
-                        <p><a class="btn btn-danger" href="{% url 'delete-comment' id=comment.id %}">Delete</a></p>
+                        <p><a class="btn btn-danger" href="{% url 'comment-delete' id=comment.id %}">Delete</a></p>
                     {% endif %}
                 </div>
             </div>
