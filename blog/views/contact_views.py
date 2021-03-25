@@ -6,7 +6,7 @@ from django.contrib import messages
 
 
 class ContactFormView(FormView):
-    template_name = 'pages/contact.html'
+    template_name = 'pages/form.html'
     form_class = ContactForm
     success_url = reverse_lazy('homepage')
 

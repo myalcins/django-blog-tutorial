@@ -6,7 +6,7 @@ from django.db.models import Q
 
 
 class CategoriesArticleListView(ListView):
-    template_name = 'pages/category.html'
+    template_name = 'pages/article-list.html'
     context_object_name = 'articles'
     paginate_by = 10
 

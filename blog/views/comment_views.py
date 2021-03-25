@@ -6,10 +6,8 @@ from django.urls import reverse
 
 
 class CommentDeleteView(DeleteView):
-    template_name = 'pages/article-delete.html'
-    
+    template_name = 'pages/confirm-delete.html'
 
-    
     def get_object(self):
         comment = get_object_or_404(Comment, pk=self.kwargs.get('id'), owner=self.request.user)
         return comment

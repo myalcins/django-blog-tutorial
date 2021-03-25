@@ -13,7 +13,7 @@ from django.urls import reverse
 
 class ArticleListView(ListView):
     queryset = Article.objects.all()
-    template_name = 'pages/homepage.html'
+    template_name = 'pages/article-list.html'
     context_object_name = 'articles'
     paginate_by = 10
 
@@ -55,7 +55,7 @@ class ArticleDetailView(View):
 
 
 class ArticleDeleteView(DeleteView):
-    template_name = 'pages/article-delete.html'
+    template_name = 'pages/confirm-delete.html'
     success_url = reverse_lazy('user-articles')
 
     def get_queryset(self):
@@ -64,7 +64,7 @@ class ArticleDeleteView(DeleteView):
 
 
 class ArticleFormView(FormView):
-    template_name = "pages/article-create.html"
+    template_name = "pages/form.html"
     form_class = ArticleForm
     success_url = reverse_lazy('user-articles')
 
@@ -77,7 +77,7 @@ class ArticleFormView(FormView):
 
 
 class ArticleUptadeView(UpdateView):
-    template_name = 'pages/article-edit.html'
+    template_name = 'pages/form.html'
     fields = ('title', 'content', 'image', 'category')
 
     def get_object(self):

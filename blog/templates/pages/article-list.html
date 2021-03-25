@@ -26,13 +26,8 @@
     
     {% if messages %}
 
-        <div class="alert alert-success" role="alert">
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-                </ul>        
-            </div>
+        {% include 'components/messages.html' %}
+
     {% endif %}
 
     <nav aria-label="Page navigation example">
