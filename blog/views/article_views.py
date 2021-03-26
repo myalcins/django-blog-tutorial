@@ -1,4 +1,5 @@
 from django.db.models import query
+from django.urls import base
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, FormView
 from django.views.generic.edit import UpdateView
@@ -9,7 +10,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django.contrib import messages 
 from django.urls import reverse
-
+from blog.tasks import scheduled_post
+from django.core import serializers
+from account.models import User
+from django.core.files.storage import FileSystemStorage
 
 class ArticleListView(ListView):
     queryset = Article.objects.all()
@@ -69,11 +73,32 @@ class ArticleFormView(FormView):
     success_url = reverse_lazy('user-articles')
 
     def form_valid(self, form):
-        article = form.save(commit=False) 
-        article.owner = self.request.user
-        article.save()
-        form.save_m2m()
-        return redirect(self.success_url)
+        
+        if form.cleaned_data.get('schedule_time'):
+            
+            image = form.cleaned_data.get('image')
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            category = serializers.serialize('json', form.cleaned_data.get('category'), fields=('id',))
+            owner = serializers.serialize('json', User.objects.filter(id=self.request.user.id), fields=('id',))
+            
+            fs = FileSystemStorage(location='media/article_images', base_url='article_images')
+            image = fs.save(str(image), image)
+            image_url = fs.url(image)
+
+            scheduled_post.apply_async(kwargs={"title": title, 
+                                        "content": content,
+                                        "category": category,
+                                        "owner": owner,
+                                        "image": image_url}, eta=form.cleaned_data.get('schedule_time'))
+            return redirect(self.success_url)
+
+        else:
+            article = form.save(commit=False) 
+            article.owner = self.request.user
+            article.save()
+            form.save_m2m()
+            return redirect(self.success_url)
 
 
 class ArticleUptadeView(UpdateView):

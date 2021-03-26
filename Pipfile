@@ -9,6 +9,7 @@ django-autoslug = "*"
 pillow = "*"
 django-ckeditor = "*"
 django-crispy-forms = "*"
+celery = "*"
 
 [dev-packages]
 
